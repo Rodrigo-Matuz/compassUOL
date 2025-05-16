@@ -1,48 +1,48 @@
-from calculator import Calculadora
+from calculadora import Calculadora
 
 
 def main():
     calc = Calculadora()
 
-    print("Choose an operation:")
-    print("1. Square Root")
-    print("2. Power Of")
-    print("3. Addition")
-    print("4. Subtraction")
-    print("5. Multiplication")
-    print("6. Division")
-    choice = input("Enter your choice (1-6): ")
+    print("Escolha uma operação:")
+    print("1. Raiz Quadrada")
+    print("2. Potência")
+    print("3. Adição")
+    print("4. Subtração")
+    print("5. Multiplicação")
+    print("6. Divisão")
+    escolha = input("Digite sua escolha (1-6): ")
 
-    if choice == "1":
-        a = input("Enter a number: ")
+    if escolha == "1":
+        a = input("Digite um número: ")
         try:
             a = float(a)
-            print("Result:", calc.square_root(a))
+            print("Resultado:", calc.raiz_quadrada(a))
         except ValueError:
-            print("Invalid input")
+            print("Entrada inválida")
 
-    elif choice in ["2", "3", "4", "5", "6"]:
-        a = input("Enter first number: ")
-        b = input("Enter second number: ")
+    elif escolha in ["2", "3", "4", "5", "6"]:
+        a = input("Digite o primeiro número: ")
+        b = input("Digite o segundo número: ")
         try:
             a = float(a)
             b = float(b)
 
-            if choice == "2":
-                print("Result:", calc.power_of(a, b))
-            elif choice == "3":
-                print("Result:", calc.addition(a, b))
-            elif choice == "4":
-                print("Result:", calc.subtraction(a, b))
-            elif choice == "5":
-                print("Result:", calc.multiplication(a, b))
-            elif choice == "6":
-                print("Result:", calc.division(a, b))
+            if escolha == "2":
+                print("Resultado:", calc.potencia(a, b))
+            elif escolha == "3":
+                print("Resultado:", calc.adicao(a, b))
+            elif escolha == "4":
+                print("Resultado:", calc.subtracao(a, b))
+            elif escolha == "5":
+                print("Resultado:", calc.multiplicacao(a, b))
+            elif escolha == "6":
+                print("Resultado:", calc.divisao(a, b))
         except ValueError:
-            print("Invalid input")
+            print("Entrada inválida")
 
     else:
-        print("Invalid choice")
+        print("Escolha inválida")
 
 
 if __name__ == "__main__":
