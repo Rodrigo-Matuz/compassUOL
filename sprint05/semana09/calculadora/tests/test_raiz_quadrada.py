@@ -1,5 +1,5 @@
 import pytest
-from main import Calculadora
+from calculadora import Calculadora
 
 
 @pytest.fixture()
