@@ -7,31 +7,31 @@ def calculador():
     return Calculadora()
 
 
-@pytest.mark.square_root
-@pytest.mark.parametrize("a, expected", [(4, 2), (9.0, 3.0), (0, 0)])
-def test_square_root_takes_numbers(calculador, a, expected):
+@pytest.mark.raiz_quadrada
+@pytest.mark.parametrize("a, esperado", [(4, 2), (9.0, 3.0), (0, 0)])
+def test_raiz_quadrada_numeros(calculador, a, esperado):
     """
-    Square Root with Numeric Inputs
+    Raiz Quadrada com Entradas Numéricas
 
-    Tests the square_root method with valid numeric inputs.
+    Testa o método raiz_quadrada com entradas numéricas válidas.
     """
-    assert calculador.square_root(a) == expected
+    assert calculador.raiz_quadrada(a) == esperado
 
 
-@pytest.mark.square_root
+@pytest.mark.raiz_quadrada
 @pytest.mark.parametrize(
-    "a, expected",
+    "a, esperado",
     [
-        ("foo", "Invalid input"),
-        (None, "Invalid input"),
-        (True, "Invalid input"),
-        (-1, "Invalid input"),
+        ("foo", "Entrada inválida"),
+        (None, "Entrada inválida"),
+        (True, "Entrada inválida"),
+        (-1, "Entrada inválida"),
     ],
 )
-def test_square_root_invalid_inputs(calculador, a, expected):
+def test_raiz_quadrada_entradas_invalidas(calculador, a, esperado):
     """
-    Square Root with Invalid Inputs
+    Raiz Quadrada com Entradas Inválidas
 
-    Tests the square_root method with invalid inputs.
+    Testa o método raiz_quadrada com entradas inválidas.
     """
-    assert calculador.square_root(a) == expected
+    assert calculador.raiz_quadrada(a) == esperado

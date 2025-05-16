@@ -7,83 +7,83 @@ def calculador():
     return Calculadora()
 
 
-@pytest.mark.division
-@pytest.mark.parametrize("a, b, expected", [(6, 2, 3), (7.5, 2.5, 3.0), (-6, -2, 3)])
-def test_division_takes_numbers(calculador, a, b, expected):
+@pytest.mark.divisao
+@pytest.mark.parametrize("a, b, esperado", [(6, 2, 3), (7.5, 2.5, 3.0), (-6, -2, 3)])
+def test_divisao_numeros(calculador, a, b, esperado):
     """
-    Division with Numeric Inputs
+    Divisão com Entradas Numéricas
 
-    Tests the division method with numeric inputs (integers and floats) to ensure correct division.
+    Testa o método de divisão com entradas numéricas (inteiros e floats) para garantir a divisão correta.
     """
-    assert calculador.division(a, b) == expected
+    assert calculador.divisao(a, b) == esperado
 
 
-@pytest.mark.division
+@pytest.mark.divisao
 @pytest.mark.parametrize(
-    "a, b, expected",
+    "a, b, esperado",
     [
-        ("foo", "bar", "Invalid input"),
-        (1, "bar", "Invalid input"),
-        ("foo", 2, "Invalid input"),
+        ("foo", "bar", "Entrada inválida"),
+        (1, "bar", "Entrada inválida"),
+        ("foo", 2, "Entrada inválida"),
     ],
 )
-def test_division_handle_strings(calculador, a, b, expected):
+def test_divisao_strings(calculador, a, b, esperado):
     """
-    Division with String Inputs
+    Divisão com Entradas de String
 
-    Tests the division method with string inputs to verify it returns "Invalid input" as expected.
+    Testa o método de divisão com entradas de string para verificar se retorna "Entrada inválida" conforme esperado.
     """
-    assert calculador.division(a, b) == expected
+    assert calculador.divisao(a, b) == esperado
 
 
-@pytest.mark.division
+@pytest.mark.divisao
 @pytest.mark.parametrize(
-    "a, b, expected",
+    "a, b, esperado",
     [
-        (None, 2, "Invalid input"),
-        (1, None, "Invalid input"),
-        (None, None, "Invalid input"),
+        (None, 2, "Entrada inválida"),
+        (1, None, "Entrada inválida"),
+        (None, None, "Entrada inválida"),
     ],
 )
-def test_division_handle_none(calculador, a, b, expected):
+def test_divisao_none(calculador, a, b, esperado):
     """
-    Division with None Inputs
+    Divisão com Entradas None
 
-    Tests the division method when one or both inputs are None, expecting "Invalid input" as a response.
+    Testa o método de divisão quando um ou ambos os inputs são None, esperando "Entrada inválida" como resposta.
     """
-    assert calculador.division(a, b) == expected
+    assert calculador.divisao(a, b) == esperado
 
 
-@pytest.mark.division
+@pytest.mark.divisao
 @pytest.mark.parametrize(
-    "a, b, expected",
+    "a, b, esperado",
     [
-        (True, False, "Invalid input"),
-        (True, 2, "Invalid input"),
-        (1, False, "Invalid input"),
+        (True, False, "Entrada inválida"),
+        (True, 2, "Entrada inválida"),
+        (1, False, "Entrada inválida"),
     ],
 )
-def test_division_handle_boolean(calculador, a, b, expected):
+def test_divisao_booleanos(calculador, a, b, esperado):
     """
-    Division with Boolean Inputs
+    Divisão com Entradas Booleanas
 
-    Tests the division method with boolean inputs to ensure it returns "Invalid input".
+    Testa o método de divisão com entradas booleanas para garantir que retorna "Entrada inválida".
     """
-    assert calculador.division(a, b) == expected
+    assert calculador.divisao(a, b) == esperado
 
 
-@pytest.mark.division
+@pytest.mark.divisao
 @pytest.mark.parametrize(
-    "a, b, expected",
+    "a, b, esperado",
     [
-        (6, 0, "Division by zero error"),
-        (0, 0, "Division by zero error"),
+        (6, 0, "Erro: Divisão por zero"),
+        (0, 0, "Erro: Divisão por zero"),
     ],
 )
-def test_division_by_zero(calculador, a, b, expected):
+def test_divisao_por_zero(calculador, a, b, esperado):
     """
-    Division by Zero
+    Divisão por Zero
 
-    Tests the division method to handle division by zero, expecting a specific error message.
+    Testa o método de divisão para lidar com a divisão por zero, esperando uma mensagem de erro específica.
     """
-    assert calculador.division(a, b) == expected
+    assert calculador.divisao(a, b) == esperado

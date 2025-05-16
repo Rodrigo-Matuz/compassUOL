@@ -7,66 +7,66 @@ def calculador():
     return Calculadora()
 
 
-@pytest.mark.subtraction
-@pytest.mark.parametrize("a, b, expected", [(6, 2, 4), (7.5, 2, 5.5), (-6, -2, -4)])
-def test_subtraction_takes_numbers(calculador, a, b, expected):
+@pytest.mark.subtracao
+@pytest.mark.parametrize("a, b, esperado", [(6, 2, 4), (7.5, 2, 5.5), (-6, -2, -4)])
+def test_subtracao_numeros(calculador, a, b, esperado):
     """
-    Subtraction with Numeric Inputs
+    Subtração com Entradas Numéricas
 
-    Tests the subtraction method with numeric inputs (integers and floats) to ensure correct subtraction.
+    Testa o método subtracao com entradas numéricas (inteiros e floats) para garantir a subtração correta.
     """
-    assert calculador.subtraction(a, b) == expected
+    assert calculador.subtracao(a, b) == esperado
 
 
-@pytest.mark.subtraction
+@pytest.mark.subtracao
 @pytest.mark.parametrize(
-    "a, b, expected",
+    "a, b, esperado",
     [
-        ("foo", "bar", "Invalid input"),
-        (1, "bar", "Invalid input"),
-        ("foo", 2, "Invalid input"),
+        ("foo", "bar", "Entrada inválida"),
+        (1, "bar", "Entrada inválida"),
+        ("foo", 2, "Entrada inválida"),
     ],
 )
-def test_subtraction_handle_strings(calculador, a, b, expected):
+def test_subtracao_strings(calculador, a, b, esperado):
     """
-    Subtraction with String Inputs
+    Subtração com Entradas String
 
-    Tests the subtraction method with string inputs to verify it returns "Invalid input" as expected.
+    Testa o método subtracao com entradas string para verificar se retorna "Entrada inválida" conforme esperado.
     """
-    assert calculador.subtraction(a, b) == expected
+    assert calculador.subtracao(a, b) == esperado
 
 
-@pytest.mark.subtraction
+@pytest.mark.subtracao
 @pytest.mark.parametrize(
-    "a, b, expected",
+    "a, b, esperado",
     [
-        (None, 2, "Invalid input"),
-        (1, None, "Invalid input"),
-        (None, None, "Invalid input"),
+        (None, 2, "Entrada inválida"),
+        (1, None, "Entrada inválida"),
+        (None, None, "Entrada inválida"),
     ],
 )
-def test_subtraction_handle_none(calculador, a, b, expected):
+def test_subtracao_none(calculador, a, b, esperado):
     """
-    Subtraction with None Inputs
+    Subtração com Entradas None
 
-    Tests the subtraction method when one or both inputs are None, expecting "Invalid input" as a response.
+    Testa o método subtracao quando uma ou ambas as entradas são None, esperando "Entrada inválida" como resposta.
     """
-    assert calculador.subtraction(a, b) == expected
+    assert calculador.subtracao(a, b) == esperado
 
 
-@pytest.mark.subtraction
+@pytest.mark.subtracao
 @pytest.mark.parametrize(
-    "a, b, expected",
+    "a, b, esperado",
     [
-        (True, False, "Invalid input"),
-        (True, 2, "Invalid input"),
-        (1, False, "Invalid input"),
+        (True, False, "Entrada inválida"),
+        (True, 2, "Entrada inválida"),
+        (1, False, "Entrada inválida"),
     ],
 )
-def test_subtraction_handle_boolean(calculador, a, b, expected):
+def test_subtracao_booleanos(calculador, a, b, esperado):
     """
-    Subtraction with Boolean Inputs
+    Subtração com Entradas Booleanas
 
-    Tests the subtraction method with boolean inputs to ensure it returns "Invalid input".
+    Testa o método subtracao com entradas booleanas para garantir que retorna "Entrada inválida".
     """
-    assert calculador.subtraction(a, b) == expected
+    assert calculador.subtracao(a, b) == esperado

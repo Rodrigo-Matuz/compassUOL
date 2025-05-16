@@ -7,32 +7,32 @@ def calculador():
     return Calculadora()
 
 
-@pytest.mark.power_of
-@pytest.mark.parametrize("a, b, expected", [(2, 3, 8), (5.0, 2, 25.0), (2, -2, 0.25)])
-def test_power_of_takes_numbers(calculador, a, b, expected):
+@pytest.mark.potencia
+@pytest.mark.parametrize("a, b, esperado", [(2, 3, 8), (5.0, 2, 25.0), (2, -2, 0.25)])
+def test_potencia_numeros(calculador, a, b, esperado):
     """
-    Power Of with Numeric Inputs
+    Potência com Entradas Numéricas
 
-    Tests the power_of method with valid numeric inputs.
+    Testa o método de potência com entradas numéricas válidas.
     """
-    assert calculador.power_of(a, b) == expected
+    assert calculador.potencia(a, b) == esperado
 
 
-@pytest.mark.power_of
+@pytest.mark.potencia
 @pytest.mark.parametrize(
-    "a, b, expected",
+    "a, b, esperado",
     [
-        ("foo", 2, "Invalid input"),
-        (2, "bar", "Invalid input"),
-        (None, 2, "Invalid input"),
-        (True, 2, "Invalid input"),
-        (2, None, "Invalid input"),
+        ("foo", 2, "Entrada inválida"),
+        (2, "bar", "Entrada inválida"),
+        (None, 2, "Entrada inválida"),
+        (True, 2, "Entrada inválida"),
+        (2, None, "Entrada inválida"),
     ],
 )
-def test_power_of_invalid_inputs(calculador, a, b, expected):
+def test_potencia_entradas_invalidas(calculador, a, b, esperado):
     """
-    Power Of with Invalid Inputs
+    Potência com Entradas Inválidas
 
-    Tests the power_of method with invalid inputs.
+    Testa o método de potência com entradas inválidas.
     """
-    assert calculador.power_of(a, b) == expected
+    assert calculador.potencia(a, b) == esperado

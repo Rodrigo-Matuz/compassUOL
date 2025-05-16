@@ -7,66 +7,66 @@ def calculador():
     return Calculadora()
 
 
-@pytest.mark.addition
-@pytest.mark.parametrize("a, b, expected", [(1, 2, 3), (1.0, 2.5, 3.5), (-1, -2, -3)])
-def test_addition_takes_numbers(calculador, a, b, expected):
+@pytest.mark.adicao
+@pytest.mark.parametrize("a, b, esperado", [(1, 2, 3), (1.0, 2.5, 3.5), (-1, -2, -3)])
+def test_adicao_numeros(calculador, a, b, esperado):
     """
-    Addition with Numeric Inputs
+    Adição com Entradas Numéricas
 
-    Tests the addition method with numeric inputs (integers and floats) to ensure correct addition.
+    Testa o método de adição com entradas numéricas (inteiros e floats) para garantir a soma correta.
     """
-    assert calculador.addition(a, b) == expected
+    assert calculador.adicao(a, b) == esperado
 
 
-@pytest.mark.addition
+@pytest.mark.adicao
 @pytest.mark.parametrize(
-    "a, b, expected",
+    "a, b, esperado",
     [
-        ("foo", "bar", "Invalid input"),
-        (1, "bar", "Invalid input"),
-        ("foo", 2, "Invalid input"),
+        ("foo", "bar", "Entrada inválida"),
+        (1, "bar", "Entrada inválida"),
+        ("foo", 2, "Entrada inválida"),
     ],
 )
-def test_addition_handle_strings(calculador, a, b, expected):
+def test_adicao_strings(calculador, a, b, esperado):
     """
-    Addition with String Inputs
+    Adição com Entradas de String
 
-    Tests the addition method with string inputs to verify it returns "Invalid input" as expected.
+    Testa o método de adição com entradas de string para verificar se retorna "Entrada inválida" conforme esperado.
     """
-    assert calculador.addition(a, b) == expected
+    assert calculador.adicao(a, b) == esperado
 
 
-@pytest.mark.addition
+@pytest.mark.adicao
 @pytest.mark.parametrize(
-    "a, b, expected",
+    "a, b, esperado",
     [
-        (None, 2, "Invalid input"),
-        (1, None, "Invalid input"),
-        (None, None, "Invalid input"),
+        (None, 2, "Entrada inválida"),
+        (1, None, "Entrada inválida"),
+        (None, None, "Entrada inválida"),
     ],
 )
-def test_addition_handle_none(calculador, a, b, expected):
+def test_adicao_none(calculador, a, b, esperado):
     """
-    Addition with None Inputs
+    Adição com Entradas None
 
-    Tests the addition method when one or both inputs are None, expecting "Invalid input" as a response.
+    Testa o método de adição quando um ou ambos os inputs são None, esperando "Entrada inválida" como resposta.
     """
-    assert calculador.addition(a, b) == expected
+    assert calculador.adicao(a, b) == esperado
 
 
-@pytest.mark.addition
+@pytest.mark.adicao
 @pytest.mark.parametrize(
-    "a, b, expected",
+    "a, b, esperado",
     [
-        (True, False, "Invalid input"),
-        (True, 2, "Invalid input"),
-        (1, False, "Invalid input"),
+        (True, False, "Entrada inválida"),
+        (True, 2, "Entrada inválida"),
+        (1, False, "Entrada inválida"),
     ],
 )
-def test_addition_handle_boolean(calculador, a, b, expected):
+def test_adicao_booleanos(calculador, a, b, esperado):
     """
-    Addition with Boolean Inputs
+    Adição com Entradas Booleanas
 
-    Tests the addition method with boolean inputs to ensure it returns "Invalid input".
+    Testa o método de adição com entradas booleanas para garantir que retorna "Entrada inválida".
     """
-    assert calculador.addition(a, b) == expected
+    assert calculador.adicao(a, b) == esperado
