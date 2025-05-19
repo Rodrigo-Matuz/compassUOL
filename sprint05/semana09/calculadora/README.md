@@ -32,13 +32,14 @@ python -m venv env
 ```
 
 4. Ative o ambiente virtual
-```bash
-# No Linux
-source env/bin/activate
+    ```bash
+    # No Linux
+    source env/bin/activate
+    
+    # No Windows (PowerShell)
+    .\env\Scripts\Activate.ps1
+    ```
 
-# No Windows (PowerShell)
-.\env\Scripts\Activate.ps1
-```
 5. Instale as dependências
 ```bash
 pip install -r requirements.txt
