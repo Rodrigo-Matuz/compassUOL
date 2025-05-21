@@ -16,6 +16,12 @@ do zero com foco em:
 - Organização e execução de testes com tags;
 - Análise dos relatórios gerados automaticamente após cada execução.
 
+## API Utilizada
+
+Durante os teste, foi escolhida a seguinte API para prática:
+
+- [Restful-Booker](https://restful-booker.herokuapp.com/apidoc/index.html)
+
 ## Objetivo
 
 Este projeto reflete o aprendizado adquirido sobre automação de testes com
