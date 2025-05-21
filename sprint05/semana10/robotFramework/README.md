@@ -11,7 +11,7 @@ do zero com foco em:
 
 - Estruturação de testes utilizando a abordagem Keyword-Driven;
 - Consumo de APIs REST utilizando a biblioteca RequestsLibrary do Robot Framework;
-- Testes com diferentes verbos HTTP (GET, POST, PUT, DELETE);
+- Testes com diferentes verbos HTTP (`GET`, `POST`, `PUT`, `DELETE`);
 - Autenticação de usuários via token;
 - Organização e execução de testes com tags;
 - Análise dos relatórios gerados automaticamente após cada execução.
