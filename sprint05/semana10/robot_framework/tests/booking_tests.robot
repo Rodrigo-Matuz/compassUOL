@@ -53,3 +53,8 @@ Deve Deletar Reserva
     ${booking_id}=      Set Variable    ${nova_reserva['bookingid']}
     ${token}=           Obter Token
     Deletar Reserva     ${booking_id}    ${token}
+
+
+Deve Validar Healthcheck
+    Desabilitar Avisos SSL
+    Verificar Healthcheck
