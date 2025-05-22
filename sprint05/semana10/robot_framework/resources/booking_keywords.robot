@@ -105,3 +105,27 @@ Atualizar Reserva
     Should Be Equal As Integers    
     ...    ${response.status_code}    200
     RETURN    ${response.json()}
+
+
+Atualizar Parcial Reserva
+    [Arguments]    ${booking_id}    ${token}
+    Create Session    
+    ...    alias=restful-booker    
+    ...    url=${BASE_URL}
+    ${headers}=    
+    ...    Create Dictionary    
+    ...    Cookie=token=${token}
+    ${payload}=    
+    ...    Create Dictionary    
+    ...    firstname=Updated    
+    ...    lastname=User
+    ${response}=    
+    ...    PATCH On Session
+    ...    alias=restful-booker
+    ...    url=${BOOKING_ENDPOINT}/${booking_id}
+    ...    headers=${headers}
+    ...    json=${payload}
+    Should Be Equal As Integers    
+    ...    ${response.status_code}    200
+    RETURN    ${response.json()}
+
