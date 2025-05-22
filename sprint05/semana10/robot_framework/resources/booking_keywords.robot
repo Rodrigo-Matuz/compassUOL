@@ -76,3 +76,32 @@ Criar Reserva
     ...    ${response.status_code}    200
     RETURN    ${response.json()}
 
+
+Atualizar Reserva
+    [Arguments]    ${booking_id}    ${token}
+    Create Session    
+    ...    alias=restful-booker    
+    ...    url=${BASE_URL}
+    ${headers}=    
+    ...    Create Dictionary    
+    ...    Cookie=token=${token}
+    ${bookingdates}=    
+    ...    Create Dictionary    
+    ...    checkin=2025-11-01    
+    ...    checkout=2026-01-01
+    ${payload}=    
+    ...    Create Dictionary
+    ...    firstname=Rodrigo
+    ...    lastname=Lima
+    ...    totalprice=200
+    ...    depositpaid=False
+    ...    bookingdates=${bookingdates}
+    ${response}=    
+    ...    PUT On Session
+    ...    alias=restful-booker    
+    ...    url=${BOOKING_ENDPOINT}/${booking_id}
+    ...    headers=${headers}
+    ...    json=${payload}
+    Should Be Equal As Integers    
+    ...    ${response.status_code}    200
+    RETURN    ${response.json()}
