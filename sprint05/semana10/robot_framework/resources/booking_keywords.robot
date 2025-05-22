@@ -129,3 +129,19 @@ Atualizar Parcial Reserva
     ...    ${response.status_code}    200
     RETURN    ${response.json()}
 
+
+Deletar Reserva
+    [Arguments]    ${booking_id}    ${token}
+    Create Session    
+    ...    alias=restful-booker    
+    ...    url=${BASE_URL}
+    ${headers}=    
+    ...    Create Dictionary    
+    ...    Cookie=token=${token}
+    ${response}=    
+    ...    DELETE On Session
+    ...    alias=restful-booker
+    ...    url=${BOOKING_ENDPOINT}/${booking_id}
+    ...    headers=${headers}
+    Should Be Equal As Integers    
+    ...    ${response.status_code}    201
