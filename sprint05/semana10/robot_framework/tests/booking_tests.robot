@@ -46,3 +46,10 @@ Deve Atualizar Parcialmente Reserva
     ${res}=             Atualizar Parcial Reserva    ${booking_id}    ${token}
     Log To Console      ${res}
 
+
+Deve Deletar Reserva
+    Desabilitar Avisos SSL
+    ${nova_reserva}=    Criar Reserva
+    ${booking_id}=      Set Variable    ${nova_reserva['bookingid']}
+    ${token}=           Obter Token
+    Deletar Reserva     ${booking_id}    ${token}
