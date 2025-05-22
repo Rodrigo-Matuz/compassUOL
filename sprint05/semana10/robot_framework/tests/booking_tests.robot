@@ -13,3 +13,11 @@ Deve Buscar Todas Reservas
     Desabilitar Avisos SSL
     ${res}=    Buscar Reservas
     Log To Console    ${res}
+
+
+Deve Buscar Reserva Por ID
+    Desabilitar Avisos SSL
+    ${nova_reserva}=    Criar Reserva
+    ${booking_id}=    Set Variable    ${nova_reserva['bookingid']}
+    ${res}=    Buscar Reserva Por ID    ${booking_id}
+    Log To Console    ${res}
