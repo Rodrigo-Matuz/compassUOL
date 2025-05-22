@@ -3,6 +3,11 @@ Library       RequestsLibrary
 Resource      ../variables/booking_vars.robot
 
 *** Keywords ***
+# Desativa os warnings de SSL que surgem quando o certificado não é verificado.
+Desabilitar Avisos SSL
+    Evaluate    __import__('urllib3').disable_warnings()
+
+
 Obter Token
     Create Session    
     ...    alias=restful-booker    
