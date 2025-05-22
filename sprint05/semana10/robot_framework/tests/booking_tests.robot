@@ -28,3 +28,12 @@ Deve Criar Reserva
     ${res}=    Criar Reserva
     Log To Console    ${res}
 
+
+Deve Atualizar Reserva
+    Desabilitar Avisos SSL
+    ${nova_reserva}=    Criar Reserva
+    ${booking_id}=      Set Variable    ${nova_reserva['bookingid']}
+    ${token}=           Obter Token
+    ${res}=             Atualizar Reserva    ${booking_id}    ${token}
+    Log To Console      ${res}
+
