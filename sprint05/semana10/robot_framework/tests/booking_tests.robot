@@ -21,3 +21,10 @@ Deve Buscar Reserva Por ID
     ${booking_id}=    Set Variable    ${nova_reserva['bookingid']}
     ${res}=    Buscar Reserva Por ID    ${booking_id}
     Log To Console    ${res}
+
+
+Deve Criar Reserva
+    Desabilitar Avisos SSL
+    ${res}=    Criar Reserva
+    Log To Console    ${res}
+
