@@ -51,3 +51,28 @@ Buscar Reserva Por ID
     ...    ${response.status_code}    200
     RETURN    ${response.json()}
 
+
+Criar Reserva
+    Create Session    
+    ...    alias=restful-booker    
+    ...    url=${BASE_URL}
+    ${bookingdates}=    
+    ...    Create Dictionary    
+    ...    checkin=2025-11-01    
+    ...    checkout=2026-01-01
+    ${payload}=    Create Dictionary
+    ...    firstname=Rodrigo
+    ...    lastname=Santos
+    ...    totalprice=150
+    ...    depositpaid=True
+    ...    bookingdates=${bookingdates}
+    ...    additionalneeds=Breakfast
+    ${response}=    
+    ...    POST On Session    
+    ...    alias=restful-booker    
+    ...    url=${BOOKING_ENDPOINT}    
+    ...    json=${payload}
+    Should Be Equal As Integers    
+    ...    ${response.status_code}    200
+    RETURN    ${response.json()}
+
