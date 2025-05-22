@@ -36,3 +36,18 @@ Buscar Reservas
     Should Be Equal As Integers    
     ...    ${response.status_code}    200
     RETURN    ${response.json()}
+
+
+Buscar Reserva Por ID
+    [Arguments]    ${booking_id}
+    Create Session    
+    ...    alias=restful-booker    
+    ...    url=${BASE_URL}
+    ${response}=    
+    ...    GET On Session    
+    ...    alias=restful-booker    
+    ...    url=${BOOKING_ENDPOINT}/${booking_id}
+    Should Be Equal As Integers    
+    ...    ${response.status_code}    200
+    RETURN    ${response.json()}
+
