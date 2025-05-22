@@ -145,3 +145,15 @@ Deletar Reserva
     ...    headers=${headers}
     Should Be Equal As Integers    
     ...    ${response.status_code}    201
+
+
+Verificar Healthcheck
+    Create Session    
+    ...    alias=restful-booker    
+    ...    url=${BASE_URL}
+    ${response}=    
+    ...    GET On Session    
+    ...    alias=restful-booker    
+    ...    url=${PING_ENDPOINT}
+    Should Be Equal As Integers    
+    ...    ${response.status_code}    201
