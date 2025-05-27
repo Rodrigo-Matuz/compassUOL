@@ -24,3 +24,8 @@ Log Resposta API
     Log    Status Code: ${response.status_code}
     Log    Response Headers: ${response.headers}
     Log    Response Body: ${response.text}
+
+Verificar Se É Lista
+    [Arguments]    ${valor}
+    ${tipo}=    Evaluate    type(${valor}).__name__
+    Should Be Equal    ${tipo}    list    O retorno não é uma lista. Tipo encontrado: ${tipo}
