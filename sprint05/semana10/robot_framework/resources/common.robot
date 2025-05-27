@@ -2,6 +2,8 @@
 Documentation     Common keywords and utilities used across the test suite
 Library           RequestsLibrary
 Library           Collections
+Library           String
+Library           DateTime
 
 *** Keywords ***
 Desabilitar Avisos SSL
@@ -24,6 +26,13 @@ Log Resposta API
     Log    Status Code: ${response.status_code}
     Log    Response Headers: ${response.headers}
     Log    Response Body: ${response.text}
+
+Verificar Tempo De Resposta
+    [Documentation]    Verifica se o tempo de resposta está dentro do limite aceitável
+    [Arguments]    ${start_time}    ${end_time}    ${max_seconds}=2.0
+    ${response_time}=    Subtract Date From Date    ${end_time}    ${start_time}
+    Should Be True    ${response_time} < ${max_seconds}
+    RETURN    ${response_time}
 
 Verificar Se É Lista
     [Arguments]    ${valor}
