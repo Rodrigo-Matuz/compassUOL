@@ -1,164 +1,117 @@
 *** Settings ***
-Library       RequestsLibrary
-Resource      ../variables/booking_vars.robot
+Documentation     Keywords for interacting with the Restful-Booker API
+Library           RequestsLibrary
+Resource          ../variables/booking_vars.robot
+Resource          common.robot
 
 *** Keywords ***
-# Desativa os warnings de SSL que surgem quando o certificado não é verificado.
-Desabilitar Avisos SSL
-    Evaluate    __import__('urllib3').disable_warnings()
-
-
 Obter Token
-    Create Session    
-    ...    alias=restful-booker    
-    ...    url=${BASE_URL}
-    ${payload}=    
-    ...    Create Dictionary    
-    ...    username=${USER_USERNAME}    
-    ...    password=${USER_PASSWORD}
-    ${response}=    
-    ...    POST On Session    
-    ...    alias=restful-booker    
+    [Documentation]    Obtém um token de autenticação para operações que requerem autorização
+    Criar Sessão API    ${BASE_URL}
+    ${payload}=    Create Dictionary    username=${USER_USERNAME}    password=${USER_PASSWORD}
+    ${response}=    POST On Session    
+    ...    alias=api-session    
     ...    url=${AUTH_ENDPOINT}    
     ...    json=${payload}
-    Should Be Equal As Integers    
-    ...    ${response.status_code}    200
+    Verificar Status Code    ${response}    200
     RETURN    ${response.json()['token']}
 
-
 Buscar Reservas
-    Create Session    
-    ...    alias=restful-booker    
-    ...    url=${BASE_URL}
-    ${payload}=    
-    ...    Create Dictionary    
-    ...    firstname=${USER_USERNAME}
-    ${response}=    
-    ...    GET On Session    
-    ...    alias=restful-booker    
+    [Documentation]    Busca todas as reservas disponíveis
+    [Arguments]    ${filtro}=${EMPTY}
+    Criar Sessão API    ${BASE_URL}
+    ${params}=    Run Keyword If    '${filtro}' != '${EMPTY}'    Create Dictionary    ${filtro}    ELSE    Create Dictionary
+    ${response}=    GET On Session    
+    ...    alias=api-session    
     ...    url=${BOOKING_ENDPOINT}    
-    ...    json=${payload}
-    Should Be Equal As Integers    
-    ...    ${response.status_code}    200
+    ...    params=${params}
+    Verificar Status Code    ${response}    200
     RETURN    ${response.json()}
-
 
 Buscar Reserva Por ID
+    [Documentation]    Busca uma reserva específica pelo ID
     [Arguments]    ${booking_id}
-    Create Session    
-    ...    alias=restful-booker    
-    ...    url=${BASE_URL}
-    ${response}=    
-    ...    GET On Session    
-    ...    alias=restful-booker    
+    Criar Sessão API    ${BASE_URL}
+    ${response}=    GET On Session    
+    ...    alias=api-session    
     ...    url=${BOOKING_ENDPOINT}/${booking_id}
-    Should Be Equal As Integers    
-    ...    ${response.status_code}    200
+    Verificar Status Code    ${response}    200
     RETURN    ${response.json()}
-
 
 Criar Reserva
-    Create Session    
-    ...    alias=restful-booker    
-    ...    url=${BASE_URL}
-    ${bookingdates}=    
-    ...    Create Dictionary    
-    ...    checkin=2025-11-01    
-    ...    checkout=2026-01-01
+    [Documentation]    Cria uma nova reserva com os dados fornecidos
+    [Arguments]    ${firstname}=Rodrigo    ${lastname}=Santos    ${totalprice}=150    
+    ...    ${depositpaid}=${TRUE}    ${checkin}=2025-11-01    ${checkout}=2026-01-01    
+    ...    ${additionalneeds}=Breakfast
+    Criar Sessão API    ${BASE_URL}
+    ${bookingdates}=    Create Dictionary    checkin=${checkin}    checkout=${checkout}
     ${payload}=    Create Dictionary
-    ...    firstname=Rodrigo
-    ...    lastname=Santos
-    ...    totalprice=150
-    ...    depositpaid=True
+    ...    firstname=${firstname}
+    ...    lastname=${lastname}
+    ...    totalprice=${totalprice}
+    ...    depositpaid=${depositpaid}
     ...    bookingdates=${bookingdates}
-    ...    additionalneeds=Breakfast
-    ${response}=    
-    ...    POST On Session    
-    ...    alias=restful-booker    
+    ...    additionalneeds=${additionalneeds}
+    ${response}=    POST On Session    
+    ...    alias=api-session    
     ...    url=${BOOKING_ENDPOINT}    
     ...    json=${payload}
-    Should Be Equal As Integers    
-    ...    ${response.status_code}    200
+    Verificar Status Code    ${response}    200
+    Log Resposta API    ${response}
     RETURN    ${response.json()}
-
 
 Atualizar Reserva
-    [Arguments]    ${booking_id}    ${token}
-    Create Session    
-    ...    alias=restful-booker    
-    ...    url=${BASE_URL}
-    ${headers}=    
-    ...    Create Dictionary    
-    ...    Cookie=token=${token}
-    ${bookingdates}=    
-    ...    Create Dictionary    
-    ...    checkin=2025-11-01    
-    ...    checkout=2026-01-01
-    ${payload}=    
-    ...    Create Dictionary
-    ...    firstname=Rodrigo
-    ...    lastname=Lima
-    ...    totalprice=200
-    ...    depositpaid=False
+    [Documentation]    Atualiza completamente uma reserva existente
+    [Arguments]    ${booking_id}    ${token}    ${firstname}=Rodrigo    ${lastname}=Lima    
+    ...    ${totalprice}=200    ${depositpaid}=${FALSE}    ${checkin}=2025-11-01    
+    ...    ${checkout}=2026-01-01    ${additionalneeds}=Breakfast
+    Criar Sessão API    ${BASE_URL}
+    ${headers}=    Create Dictionary    Cookie=token=${token}
+    ${bookingdates}=    Create Dictionary    checkin=${checkin}    checkout=${checkout}
+    ${payload}=    Create Dictionary
+    ...    firstname=${firstname}
+    ...    lastname=${lastname}
+    ...    totalprice=${totalprice}
+    ...    depositpaid=${depositpaid}
     ...    bookingdates=${bookingdates}
-    ${response}=    
-    ...    PUT On Session
-    ...    alias=restful-booker    
+    ...    additionalneeds=${additionalneeds}
+    ${response}=    PUT On Session
+    ...    alias=api-session    
     ...    url=${BOOKING_ENDPOINT}/${booking_id}
     ...    headers=${headers}
     ...    json=${payload}
-    Should Be Equal As Integers    
-    ...    ${response.status_code}    200
+    Verificar Status Code    ${response}    200
     RETURN    ${response.json()}
-
 
 Atualizar Parcial Reserva
-    [Arguments]    ${booking_id}    ${token}
-    Create Session    
-    ...    alias=restful-booker    
-    ...    url=${BASE_URL}
-    ${headers}=    
-    ...    Create Dictionary    
-    ...    Cookie=token=${token}
-    ${payload}=    
-    ...    Create Dictionary    
-    ...    firstname=Updated    
-    ...    lastname=User
-    ${response}=    
-    ...    PATCH On Session
-    ...    alias=restful-booker
+    [Documentation]    Atualiza parcialmente uma reserva existente
+    [Arguments]    ${booking_id}    ${token}    ${firstname}=Updated    ${lastname}=User
+    Criar Sessão API    ${BASE_URL}
+    ${headers}=    Create Dictionary    Cookie=token=${token}
+    ${payload}=    Create Dictionary    firstname=${firstname}    lastname=${lastname}
+    ${response}=    PATCH On Session
+    ...    alias=api-session
     ...    url=${BOOKING_ENDPOINT}/${booking_id}
     ...    headers=${headers}
     ...    json=${payload}
-    Should Be Equal As Integers    
-    ...    ${response.status_code}    200
+    Verificar Status Code    ${response}    200
     RETURN    ${response.json()}
 
-
 Deletar Reserva
+    [Documentation]    Remove uma reserva existente
     [Arguments]    ${booking_id}    ${token}
-    Create Session    
-    ...    alias=restful-booker    
-    ...    url=${BASE_URL}
-    ${headers}=    
-    ...    Create Dictionary    
-    ...    Cookie=token=${token}
-    ${response}=    
-    ...    DELETE On Session
-    ...    alias=restful-booker
+    Criar Sessão API    ${BASE_URL}
+    ${headers}=    Create Dictionary    Cookie=token=${token}
+    ${response}=    DELETE On Session
+    ...    alias=api-session
     ...    url=${BOOKING_ENDPOINT}/${booking_id}
     ...    headers=${headers}
-    Should Be Equal As Integers    
-    ...    ${response.status_code}    201
-
+    Verificar Status Code    ${response}    201
 
 Verificar Healthcheck
-    Create Session    
-    ...    alias=restful-booker    
-    ...    url=${BASE_URL}
-    ${response}=    
-    ...    GET On Session    
-    ...    alias=restful-booker    
+    [Documentation]    Verifica se a API está funcionando corretamente
+    Criar Sessão API    ${BASE_URL}
+    ${response}=    GET On Session    
+    ...    alias=api-session    
     ...    url=${PING_ENDPOINT}
-    Should Be Equal As Integers    
-    ...    ${response.status_code}    201
+    Verificar Status Code    ${response}    201
