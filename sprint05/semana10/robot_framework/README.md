@@ -123,6 +123,11 @@ robot -d results tests/
 | healthcheck | Testes para verificar a saúde/disponibilidade do serviço.   |
 | smoke       | Testes rápidos que validam os fluxos principais do sistema. |
 | regression  | Testes mais completos para validar todas as funcionalidades.|
+| negative    | Testes que verificam o comportamento em cenários de erro.   |
+| performance | Testes que verificam o tempo de resposta da API.            |
+| schema      | Testes que validam o formato e tipos de dados das respostas.|
+| boundary    | Testes com valores limite para verificar robustez da API.   |
+| security    | Testes relacionados à segurança e autenticação.             |
 
 ## Boas Práticas Implementadas
 
