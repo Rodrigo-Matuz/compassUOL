@@ -20,27 +20,6 @@ Este projeto reflete o aprendizado adquirido sobre automação de testes com
 Robot Framework, bem como a capacidade de estruturar, autenticar e
 validar respostas de uma API REST de maneira eficiente e profissional.
 
-## Estrutura do Projeto
-
-```
-robot_framework/
-├── resources/           # Keywords e recursos compartilhados
-│   ├── booking_keywords.robot
-│   └── common.robot
-├── tests/               # Casos de teste
-│   └── booking_tests.robot
-├── variables/           # Variáveis globais
-│   └── booking_vars.robot
-├── results/             # Relatórios de execução
-│   ├── log.html
-│   ├── output.xml
-│   └── report.html
-├── env/                 # Ambiente virtual Python
-├── .gitignore
-├── README.md
-└── requirements.txt
-```
-
 ## API Utilizada
 
 Durante os teste, foi escolhida a seguinte API para prática:
