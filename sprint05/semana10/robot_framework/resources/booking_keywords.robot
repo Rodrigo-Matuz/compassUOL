@@ -2,18 +2,23 @@
 Documentation     Keywords for interacting with the Restful-Booker API
 Library           RequestsLibrary
 Resource          ../variables/booking_vars.robot
-Resource          common.robot
+Resource          ./common.robot
+Resource          ./data_generator.robot
 
 *** Keywords ***
 Obter Token
     [Documentation]    Obtém um token de autenticação para operações que requerem autorização
     Criar Sessão API    ${BASE_URL}
     ${payload}=    Create Dictionary    username=${USER_USERNAME}    password=${USER_PASSWORD}
+    ${start_time}=    Get Current Date
     ${response}=    POST On Session    
     ...    alias=api-session    
     ...    url=${AUTH_ENDPOINT}    
     ...    json=${payload}
+    ${end_time}=    Get Current Date
+    ${response_time}=    Verificar Tempo De Resposta    ${start_time}    ${end_time}    3.0
     Verificar Status Code    ${response}    200
+    Log    Tempo de resposta para autenticação: ${response_time} segundos
     RETURN    ${response.json()['token']}
 
 Buscar Reservas
@@ -21,11 +26,15 @@ Buscar Reservas
     [Arguments]    ${filtro}=${EMPTY}
     Criar Sessão API    ${BASE_URL}
     ${params}=    Run Keyword If    '${filtro}' != '${EMPTY}'    Create Dictionary    ${filtro}    ELSE    Create Dictionary
+    ${start_time}=    Get Current Date
     ${response}=    GET On Session    
     ...    alias=api-session    
     ...    url=${BOOKING_ENDPOINT}    
     ...    params=${params}
+    ${end_time}=    Get Current Date
+    ${response_time}=    Verificar Tempo De Resposta    ${start_time}    ${end_time}    3.0
     Verificar Status Code    ${response}    200
+    Log    Tempo de resposta para buscar reservas: ${response_time} segundos
     RETURN    ${response.json()}
 
 Buscar Reserva Por ID
