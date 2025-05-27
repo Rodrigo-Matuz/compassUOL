@@ -90,3 +90,23 @@ Gerar Endereço
     ...    country=${pais}
     
     RETURN    ${endereco}
+
+Gerar String Aleatória
+    [Documentation]    Gera uma string aleatória para uso em testes usando Faker
+    [Arguments]    ${length}=10
+    ${random_string}=    FakerLibrary.Lexify    text=??????????    letters=ABCDEFGHIJKLMNOPQRSTUVWXYZ
+    ${random_string}=    Evaluate    $random_string[0:${length}]
+    RETURN    ${random_string}
+    
+Gerar Número Aleatório
+    [Documentation]    Gera um número aleatório para uso em testes usando Faker
+    [Arguments]    ${min}=1    ${max}=1000
+    ${random_number}=    FakerLibrary.Random Int    min=${min}    max=${max}
+    RETURN    ${random_number}
+    
+Gerar Data Futura Simples
+    [Documentation]    Gera uma data futura para uso em testes usando Faker
+    [Arguments]    ${days_ahead}=30
+    ${random_days}=    FakerLibrary.Random Int    min=${days_ahead}    max=${days_ahead + 100}
+    ${future_date}=    Get Current Date    result_format=%Y-%m-%d    increment=${random_days} days
+    RETURN    ${future_date}
