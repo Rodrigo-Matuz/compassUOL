@@ -1,2 +1,32 @@
+# Python virtual environment
 env/
-results/
+venv/
+.env/
+.venv/
+
+# Robot Framework results
+results/*.html
+results/*.xml
+log.html
+report.html
+output.xml
+
+# Python bytecode
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Distribution / packaging
+dist/
+build/
+*.egg-info/
+
+# IDE specific files
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# OS specific files
+.DS_Store
+Thumbs.db

@@ -1,4 +1,4 @@
-# RobotFramework-API-Testing
+# Robot Framework API Testing
 
 ## Sobre este Repositório
 
@@ -39,7 +39,7 @@ git clone https://github.com/Rodrigo-Matuz/compassUOL
 cd compassUOL/sprint05/semana10/robot_framework
 
 # No Windows
-cd compassUOL\sprint05\semana10\robot_framework
+cd compassUOL\\sprint05\\semana10\\robot_framework
 ```
 
 3. Crie o ambiente virtual
@@ -47,14 +47,13 @@ cd compassUOL\sprint05\semana10\robot_framework
 python -m venv env
 ```
 
-
 4. Ative o ambiente virtual
 ```bash
 # No Linux
 source env/bin/activate
 
 # No Windows (PowerShell)
-.\env\Scripts\Activate.ps1
+.\\env\\Scripts\\Activate.ps1
 ```
 
 5. Instale as dependências
@@ -84,6 +83,11 @@ Para excluir uma tag e rodar todos os testes menos os que a possuem:
 robot -e <tag> tests/
 ```
 
+Para gerar relatórios em um diretório específico:
+```bash
+robot -d results tests/
+```
+
 ## Tags
 
 | Tag         | Descrição                                                   |
@@ -97,3 +101,19 @@ robot -e <tag> tests/
 | delete      | Testes com requisições HTTP DELETE.                         |
 | healthcheck | Testes para verificar a saúde/disponibilidade do serviço.   |
 | smoke       | Testes rápidos que validam os fluxos principais do sistema. |
+| regression  | Testes mais completos para validar todas as funcionalidades.|
+| negative    | Testes que verificam o comportamento em cenários de erro.   |
+| performance | Testes que verificam o tempo de resposta da API.            |
+| schema      | Testes que validam o formato e tipos de dados das respostas.|
+| boundary    | Testes com valores limite para verificar robustez da API.   |
+| security    | Testes relacionados à segurança e autenticação.             |
+
+## Boas Práticas Implementadas
+
+1. **Organização em Camadas**: Separação clara entre testes, keywords e variáveis
+2. **Documentação**: Todos os arquivos e keywords possuem documentação
+3. **Reutilização**: Keywords comuns extraídas para um arquivo compartilhado
+4. **Parametrização**: Keywords flexíveis com argumentos padrão
+5. **Validações**: Asserções específicas para cada tipo de teste
+6. **Setup/Teardown**: Configuração adequada para cada teste
+7. **Timeout**: Definição de timeout para evitar testes travados
