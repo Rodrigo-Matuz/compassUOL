@@ -9,6 +9,7 @@ Suite Setup      Criar e Iniciar Sessão API
 
 *** Test Cases ***
 Login Com Credenciais Válidas
+    [Tags]    post    login    authentication    negative
     ${email}=    Gerar Email Aleatório Válido
     Cadastrar Usuário    
     ...    ${NOME_VALIDO}    
@@ -23,28 +24,33 @@ Login Com Credenciais Válidas
     Should Be Equal As Integers    ${response.status_code}    401
 
 Login Com Email Inválido
+    [Tags]    post    login    authentication    negative
     ${response}=     Realizar Login    ${EMAIL_INVALIDO}    ${SENHA_VALIDA}
     Should Be Equal As Integers    ${response.status_code}    401
 
 Login Com Senha em Branco
+    [Tags]    post    login    authentication    validation
     ${response}=    Realizar Login    
     ...    ${EMAIL_VALIDO}    
     ...    
     Should Be Equal As Integers    ${response.status_code}    400
 
 Login Com Email em Branco
+    [Tags]    post    login    authentication    validation
     ${response}=    Realizar Login    
     ...     
     ...    ${SENHA_VALIDA}
     Should Be Equal As Integers    ${response.status_code}    400
 
 Login Com Campos Vazios
+    [Tags]    post    login    authentication    validation
     ${response}=    Realizar Login    
     ...      
     ...
     Should Be Equal As Integers    ${response.status_code}    400
 
 Login Com Senha Incorreta
+    [Tags]    post    login    authentication    negative
     ${email}=    Gerar Email Aleatório Válido
     Cadastrar Usuário    
     ...    ${NOME_VALIDO}    
@@ -56,5 +62,6 @@ Login Com Senha Incorreta
     Should Be Equal As Integers    ${response.status_code}    401
 
 Login Usuario Nao Cadastrado
+    [Tags]    post    login    authentication    negative
     ${response}=    Realizar Login    naoexistente@teste.com    123456
     Should Be Equal As Integers    ${response.status_code}    401
