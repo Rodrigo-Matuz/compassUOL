@@ -8,7 +8,7 @@ Suite Setup      Criar e Iniciar Sessão API
 
 *** Test Cases ***
 Cadastro De Usuário Válido
-    [Documentation]    Valida cadastro de usuário com dados válidos
+    [Documentation]    Verifica que é possível cadastrar um novo usuário com dados válidos
     [Tags]    post    usuarios    cadastro    positive
     ${email}=    Gerar Email Aleatório Válido
     ${response}=    Cadastrar Usuário Com Sucesso
@@ -19,7 +19,7 @@ Cadastro De Usuário Válido
     Log To Console    Cadastro realizado com ID: ${response.json()['_id']}
 
 Cadastro De Usuário Com Email Ja Existente
-    [Documentation]    Valida tentativa de cadastro com email já existente
+    [Documentation]    Verifica que não é possível cadastrar usuário com email duplicado
     [Tags]    post    usuarios    cadastro    negative    duplicado
     ${email}=    Gerar Email Aleatório Válido
 
@@ -38,7 +38,7 @@ Cadastro De Usuário Com Email Ja Existente
     ...    true
 
 Cadastro Com Senha Muito Curta
-    [Documentation]    Valida tentativa de cadastro com senha abaixo do limite permitido
+    [Documentation]    Verifica validação de tamanho mínimo para senha
     [Tags]    post    usuarios    cadastro    validation    senha
     ${email}=    Gerar Email Aleatório Válido
     ${response}=    Cadastrar Usuário
@@ -49,7 +49,7 @@ Cadastro Com Senha Muito Curta
     Should Be Equal As Integers    ${response.status_code}    400
 
 Cadastro Com Senha Muito Longa
-    [Documentation]    Valida tentativa de cadastro com senha acima do limite permitido
+    [Documentation]    Verifica validação de tamanho máximo para senha
     [Tags]    post    usuarios    cadastro    validation    senha
     ${email}=    Gerar Email Aleatório Válido
     ${response}=    Cadastrar Usuário
@@ -60,7 +60,7 @@ Cadastro Com Senha Muito Longa
     Should Be Equal As Integers    ${response.status_code}    400
 
 Cadastro Com Email De Dominio Bloqueado Gmail
-    [Documentation]    Valida tentativa de cadastro com email do domínio @gmail.com (bloqueado)
+    [Documentation]    Verifica rejeição de cadastro com domínio @gmail.com
     [Tags]    post    usuarios    cadastro    validation    email
     ${email}=    Gerar Email Aleatório Inválido    gmail.com
     ${response}=    Cadastrar Usuário
@@ -71,7 +71,7 @@ Cadastro Com Email De Dominio Bloqueado Gmail
     Should Be Equal As Integers    ${response.status_code}    400
 
 Cadastro Com Email De Dominio Bloqueado Hotmail
-    [Documentation]    Valida tentativa de cadastro com email do domínio @hotmail.com (bloqueado)
+    [Documentation]    Verifica rejeição de cadastro com domínio @hotmail.com
     [Tags]    post    usuarios    cadastro    validation    email
     ${email}=    Gerar Email Aleatório Inválido    hotmail.com
     ${response}=    Cadastrar Usuário
@@ -82,7 +82,7 @@ Cadastro Com Email De Dominio Bloqueado Hotmail
     Should Be Equal As Integers    ${response.status_code}    400
 
 Cadastro Com Campo Obrigatório Faltando
-    [Documentation]    Valida tentativa de cadastro com senha vazia (campo obrigatório)
+    [Documentation]    Verifica validação quando campo obrigatório (senha) é omitido
     [Tags]    post    usuarios    cadastro    validation    obrigatorio
     ${email}=    Gerar Email Aleatório Válido
     ${response}=    Cadastrar Usuário
