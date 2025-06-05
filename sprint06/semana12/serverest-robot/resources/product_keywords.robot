@@ -1,8 +1,10 @@
 *** Settings ***
 Library        RequestsLibrary
 Library        String
+Library        FakerLibrary
 Resource       ../variables/serverest_vars.robot
-Resource    user_keywords.robot
+Resource       ./common.robot
+Resource       ./user_keywords.robot
 
 *** Keywords ***
 Cadastrar Produto
@@ -43,8 +45,14 @@ Gerar Descrição Produto Aleatória
     RETURN    ${descricao}
 
 Obter Token De Autenticação
-    [Arguments]    ${email}=${EMAIL_VALIDO}    ${senha}=${SENHA_VALIDA}
-    Cadastrar Usuário Com Sucesso    ${NOME_VALIDO}    ${EMAIL_VALIDO}    ${SENHA_VALIDA}    administrador=true
+    ${nome}=    Gerar Nome Aleatório Válido
+    ${email}=    Gerar Email Aleatório Válido
+    ${senha}=    Gerar Senha Aleatória Válida
+    Cadastrar Usuário
+    ...    ${nome}
+    ...    ${email}
+    ...    ${senha}
+    ...    administrador=true
     ${body}=    Create Dictionary
     ...    email=${email}
     ...    password=${senha}
