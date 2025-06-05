@@ -3,7 +3,7 @@ Documentation       Variáveis globais utilizadas nos testes da API ServeRest
 
 *** Variables ***
 # API Endpoints
-${BASE_URL}         http://18.212.196.190:3000/
+${BASE_URL}         https://compassuol.serverest.dev/
 ${AUTH_ENDPOINT}    /login
 ${USERS_ENDPOINT}   /usuarios
 ${PRODUCTS_ENDPOINT}  /produtos
