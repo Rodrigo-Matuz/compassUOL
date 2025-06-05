@@ -17,7 +17,7 @@ ${EMAIL_INVALIDO}   rodrigolimacompass01@gmail.com
 ${SENHA_INVALIDA}   XXXXXXXXX
 
 # Headers e Autenticação
-${HEADERS}          {"Content-Type": "application/json", "Accept": "application/json"}
+&{HEADERS}          Content-Type=application/json    Accept=application/json
 ${TOKEN}            None
 
 # Tags para testes
