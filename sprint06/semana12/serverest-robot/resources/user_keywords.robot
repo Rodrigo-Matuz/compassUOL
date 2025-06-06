@@ -48,3 +48,21 @@ Listar Usuários
     [Documentation]    Lista todos os usuários cadastrados
     ${response}=    Fazer Requisição API    GET    ${USERS_ENDPOINT}
     RETURN    ${response}
+
+Excluir Usuário
+    [Documentation]    Exclui um usuário pelo ID
+    [Arguments]    ${id}    ${token}
+    ${response}=    Fazer Requisição API    DELETE    ${USERS_ENDPOINT}/${id}    token=${token}
+    RETURN    ${response}
+
+Atualizar Usuário
+    [Documentation]    Atualiza os dados de um usuário existente
+    [Arguments]    ${id}    ${nome}    ${email}    ${password}    ${administrador}    ${token}
+    ${body}=    Create Dictionary
+    ...    nome=${nome}
+    ...    email=${email}
+    ...    password=${password}
+    ...    administrador=${administrador}
+    
+    ${response}=    Fazer Requisição API    PUT    ${USERS_ENDPOINT}/${id}    ${body}    ${token}
+    RETURN    ${response}
